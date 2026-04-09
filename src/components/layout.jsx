@@ -10,8 +10,19 @@ import {
 import HomePage from "../pages/index";
 
 const Layout = () => {
+  let theme = "light";
+
+  try {
+    const systemInfo = getSystemInfo?.();
+    if (systemInfo?.zaloTheme) {
+      theme = systemInfo.zaloTheme;
+    }
+  } catch (error) {
+    theme = "light";
+  }
+
   return (
-    <App theme={getSystemInfo().zaloTheme}>
+    <App theme={theme}>
       <SnackbarProvider>
         <ZMPRouter>
           <AnimationRoutes>

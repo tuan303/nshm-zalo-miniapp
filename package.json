@@ -18,6 +18,7 @@
     "login": "zmp login",
     "start": "zmp start",
     "backend": "node server/index.js",
+    "vercel-build": "vite build",
     "build": "vite build",
     "sync:appconfig": "powershell -NoProfile -ExecutionPolicy Bypass -Command \"Copy-Item -LiteralPath 'www/app-config.json' -Destination 'app-config.json' -Force\"",
     "deploy": "npm run build && npm run sync:appconfig && zmp deploy --existing",

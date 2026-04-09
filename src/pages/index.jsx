@@ -220,15 +220,18 @@ function HomePage() {
     return "";
   }, []);
 
-  useEffect(() => {
-    if (!newsApiBase) {
-      setNewsStatus("fallback");
-      return;
+  const newsApiUrl = useMemo(() => {
+    if (newsApiBase) {
+      return `${newsApiBase}/api/oa/posts?limit=5`;
     }
 
+    return "/api/oa-posts?limit=5";
+  }, [newsApiBase]);
+
+  useEffect(() => {
     const controller = new AbortController();
 
-    fetch(`${newsApiBase}/api/oa/posts?limit=5`, {
+    fetch(newsApiUrl, {
       signal: controller.signal,
     })
       .then((response) => {
@@ -259,7 +262,7 @@ function HomePage() {
       });
 
     return () => controller.abort();
-  }, [newsApiBase]);
+  }, [newsApiUrl]);
 
   const openNewsItem = (item) => {
     if (item.url) {

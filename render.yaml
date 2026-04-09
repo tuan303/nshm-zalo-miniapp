@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: nshm-oa-news
+    runtime: node
+    plan: free
+    rootDir: .
+    buildCommand: npm install
+    startCommand: npm run backend
+    healthCheckPath: /health
+    envVars:
+      - key: OA_POSTS_ENDPOINT
+        sync: false
+      - key: OA_POSTS_METHOD
+        value: GET
+      - key: OA_MANAGER_COOKIE
+        sync: false
+      - key: OA_REFERER
+        value: https://oa.zalo.me/manage/content/article/
+      - key: OA_USER_AGENT
+        value: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36
+      - key: OA_API_PORT
+        value: 10000
